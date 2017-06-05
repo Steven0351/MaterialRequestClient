@@ -48,6 +48,6 @@ public class TestObject {
 
   @Override
   public String toString() {
-    return this.name + " of type " + this.type;
+    return this.name + " of type " + this.type + ". Multiverse id: " + this.multiverseId;
   }
 }
