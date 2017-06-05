@@ -1,4 +1,4 @@
-package com.stevensherry;
+package com.stevensherry.httptests;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,10 +24,10 @@ import java.nio.charset.Charset;
  */
 public class TestHTTPMethods {
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet("https://api.scryfall.com/cards/named?exact=hindering+light&format=json");
-;
+        TestObject testObject;
         ResponseHandler<JsonObject> rh = new ResponseHandler<JsonObject>() {
             @Override
             public JsonObject handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
@@ -48,8 +48,20 @@ public class TestHTTPMethods {
                 return gson.fromJson(reader, JsonObject.class);
             }
         };
-        JsonObject myJson = httpClient.execute(httpGet, rh);
-        System.out.println(myJson);
+        testObject = new TestObject();
+        try {
+            JsonObject myJson = httpClient.execute(httpGet, rh);
+            testObject = new TestObject(myJson.get("id").getAsString(), myJson.get("uri").getAsString(),
+                                            myJson.get("multiverse_id").getAsInt(),myJson.get("name").getAsString(),
+                                            myJson.get("type_line").getAsString());
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println(testObject);
+        }
+
+
     }
 
 }
