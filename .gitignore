@@ -1,0 +1,6 @@
+# Workspace file
+.idea/workspace.xml
+
+# External Library local paths
+.idea/libraries/lib.xml
+.idea/libraries/lib1.xml
