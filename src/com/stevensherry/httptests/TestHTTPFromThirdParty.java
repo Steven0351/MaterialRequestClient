@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by steven.sherry on 6/5/2017.
  */
-public class TestHTTPMethodsGET {
+public class TestHTTPFromThirdParty {
 static String oneCard = "https://api.scryfall.com/cards/named?exact=hindering+light&format=json";
 static String moreCards = "https://api.scryfall.com/cards/search?order=cmc&q=t%3Aartifact+pow%3E8+o%3Aflying";
     public static void main(String[] args) {
