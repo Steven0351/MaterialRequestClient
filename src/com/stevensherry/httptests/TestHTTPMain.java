@@ -7,15 +7,15 @@ import java.io.IOException;
  */
 public class TestHTTPMain {
 
-    public static void main(String[] args) {
-        UserLogin user = new UserLogin("admin", "INfantry030014**");
-        try {
-            user.login();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            System.out.println(user);
-        }
+  public static void main(String[] args) {
+    UserLogin user = new UserLogin("admin", "INfantry030014**", "admin");
+    try {
+      user.login();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      System.out.println(user);
     }
+  }
 
 }

@@ -27,82 +27,84 @@ import java.nio.charset.Charset;
  */
 public class UserLogin {
 
-    private String username;
-    private String password;
-    private String bearerToken;
-    private String uuid;
-    static String getUserUuidFromServer = "http://localhost:3005/api/v1/user/me";
-    static String loginEndPoint = "http://localhost:3005/api/v1/user/login";
-    private HttpPost login;
-    private HttpGet uuidGet;
+  private String username;
+  private String password;
+  private String bearerToken;
+  private String role;
+  private String uuid;
+  static String getUserUuidFromServer = "http://localhost:3005/api/v1/user/me";
+  static String loginEndPoint = "http://localhost:3005/api/v1/user/login";
+  private HttpPost login;
+  private HttpGet uuidGet;
 
-    UserLogin(String username, String password) {
-        this.username = username;
-        this.password = password;
-        this.login = new HttpPost(loginEndPoint);
-        this.login.addHeader("content-type", "application/json");
-        this.uuidGet = new HttpGet(getUserUuidFromServer);
-        this.uuidGet.addHeader("content-type", "application/json");
-    }
+  UserLogin(String username, String password, String role) {
+    this.username = username;
+    this.password = password;
+    this.role = role;
+    this.login = new HttpPost(loginEndPoint);
+    this.login.addHeader("content-type", "application/json");
+    this.uuidGet = new HttpGet(getUserUuidFromServer);
+    this.uuidGet.addHeader("content-type", "application/json");
+  }
 
-    public void login() throws IOException {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        ResponseHandler<JsonObject> rh = new ResponseHandler<JsonObject>() {
-            @Override
-            public JsonObject handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
-                StatusLine statusLine = httpResponse.getStatusLine();
-                HttpEntity entity = httpResponse.getEntity();
-                if (statusLine.getStatusCode() >= 300 && statusLine.getStatusCode() != 500) {
-                    throw new HttpResponseException(
-                            statusLine.getStatusCode(),
-                            statusLine.getReasonPhrase());
-                }
-                if (entity == null) {
-                    throw new ClientProtocolException("Response contains no content");
-                }
-                Gson gson = new GsonBuilder().create();
-                ContentType contentType = ContentType.getOrDefault(entity);
-                Charset charset = contentType.getCharset();
-                Reader reader = new InputStreamReader(entity.getContent(), charset);
-                return gson.fromJson(reader, JsonObject.class);
-            }
-        };
-        Gson gsonBuilder = new Gson();
-        StringEntity loginEntity = new StringEntity(gsonBuilder.toJson(this));
-        this.login.setEntity(loginEntity);
-        JsonObject myJson = httpClient.execute(this.login, rh);
-        this.setToken("Bearer " + myJson.get("token").getAsString());
-        this.uuidGet.addHeader("Authorization", this.getBearerToken());
-        myJson = httpClient.execute(this.uuidGet, rh);
-        this.setUuid(myJson.get("id").getAsString());
-    }
+  public void login() throws IOException {
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+    ResponseHandler<JsonObject> rh = new ResponseHandler<JsonObject>() {
+      @Override
+      public JsonObject handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
+        StatusLine statusLine = httpResponse.getStatusLine();
+        HttpEntity entity = httpResponse.getEntity();
+        if (statusLine.getStatusCode() >= 300 && statusLine.getStatusCode() != 500) {
+          throw new HttpResponseException(
+              statusLine.getStatusCode(),
+              statusLine.getReasonPhrase());
+        }
+        if (entity == null) {
+          throw new ClientProtocolException("Response contains no content");
+        }
+        Gson gson = new GsonBuilder().create();
+        ContentType contentType = ContentType.getOrDefault(entity);
+        Charset charset = contentType.getCharset();
+        Reader reader = new InputStreamReader(entity.getContent(), charset);
+        return gson.fromJson(reader, JsonObject.class);
+      }
+    };
+    Gson gsonBuilder = new Gson();
+    StringEntity loginEntity = new StringEntity(gsonBuilder.toJson(this));
+    this.login.setEntity(loginEntity);
+    JsonObject myJson = httpClient.execute(this.login, rh);
+    this.setToken("Bearer " + myJson.get("token").getAsString());
+    this.uuidGet.addHeader("Authorization", this.getBearerToken());
+    myJson = httpClient.execute(this.uuidGet, rh);
+    this.setUuid(myJson.get("id").getAsString());
+  }
 
-    public void setToken(String tokenFromServer) {
-        this.bearerToken = tokenFromServer;
-    }
+  public void setToken(String tokenFromServer) {
+    this.bearerToken = tokenFromServer;
+  }
 
-    public void setUuid(String uuidFromServer) {
-        this.uuid = uuidFromServer;
-    }
+  public void setUuid(String uuidFromServer) {
+    this.uuid = uuidFromServer;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public String getBearerToken() {
-        return bearerToken;
-    }
+  public String getBearerToken() {
+    return bearerToken;
+  }
 
-    public String getUuid() {
-        return uuid;
-    }
+  public String getUuid() {
+    return uuid;
+  }
 
-    @Override
-    public String toString() {
-        return "UserLogin{" +
-                "username='" + username + '\'' +
-                ", bearerToken='" + bearerToken + '\'' +
-                ", uuid='" + uuid + '\'' +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "UserLogin{" +
+        "username='" + username + '\'' +
+        ", bearerToken='" + bearerToken + '\'' +
+        ", uuid='" + uuid + '\'' +
+        '}';
+  }
 }

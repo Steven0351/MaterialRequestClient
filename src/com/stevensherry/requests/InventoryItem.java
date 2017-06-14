@@ -1,6 +1,7 @@
-package com.stevensherry.Classes;
+package com.stevensherry.requests;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by steven.sherry on 6/9/2017.
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class InventoryItem {
 
   private String inventoryID;
-  private int quantity;
+  private String quantity;
   private ArrayList<String> binLocations;
   private String cycleCountRequest;
   private String materialIssueRequest;
@@ -26,18 +27,18 @@ public class InventoryItem {
     return inventoryID;
   }
 
-  public int getQuantity() {
+  public String getQuantity() {
     return quantity;
   }
 
   public void setQuantity(int quantity) {
     if(quantity >= 0) {
-      this.quantity = quantity;
+      this.quantity = Integer.toString(quantity);
     }
   }
 
-  public void addBinLocations(String binLocation) {
-    this.binLocations.add(binLocation);
+  public void addBinLocations(String... binLocations) {
+    this.binLocations.addAll(Arrays.asList(binLocations));
   }
 
   public ArrayList<String> getBinLocations() {
