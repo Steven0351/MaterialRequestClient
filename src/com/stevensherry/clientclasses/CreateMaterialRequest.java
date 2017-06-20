@@ -1,57 +1,73 @@
 package com.stevensherry.clientclasses;
 
+import com.google.gson.stream.JsonWriter;
 import com.stevensherry.httptests.TestStatic;
 import org.apache.http.entity.StringEntity;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  * Created by stevensherry on 6/13/17.
  */
 public class CreateMaterialRequest {
-    private String manufacturerSKU;
-    private String description;
-    private String requestor;
-    private String _id;
-    private StringEntity entity;
+  private String manufacturerSKU;
+  private String description;
+  private String requestor;
+  private String id;
+  private StringEntity entity;
 
-    public CreateMaterialRequest(String manufacturerSKU, String description, String requestor) {
-        this.manufacturerSKU = manufacturerSKU;
-        this.description = description;
-        this.requestor = requestor;
-    }
-    public CreateMaterialRequest(String manufacturerSKU, String description, String requestor, String id) {
-        this.manufacturerSKU = manufacturerSKU;
-        this.description = description;
-        this.requestor = requestor;
-        this._id = id;
-    }
+  public CreateMaterialRequest(String manufacturerSKU, String description, String requestor) {
+    this.manufacturerSKU = manufacturerSKU;
+    this.description = description;
+    this.requestor = requestor;
+  }
 
-    public void setEntity() {
-        try {
-            this.entity = new StringEntity(TestStatic.gsonBuilder.toJson(this));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+  public CreateMaterialRequest(String manufacturerSKU, String description, String requestor, String id) {
+    this.manufacturerSKU = manufacturerSKU;
+    this.description = description;
+    this.requestor = requestor;
+    this.id = id;
+  }
 
-    public String getManufacturerSKU() {
-        return manufacturerSKU;
+  public void setEntity() {
+    try {
+      this.entity = new StringEntity(TestStatic.gsonBuilder.toJson(this));
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getManufacturerSKU() {
+    return manufacturerSKU;
+  }
 
-    public String getRequestor() {
-        return requestor;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public String get_id() {
-        return _id;
-    }
+  public String getRequestor() {
+    return requestor;
+  }
 
-    public StringEntity getEntity() {
-        return entity;
+  public String getId() {
+    return id;
+  }
+
+  public void writeJsonStream(OutputStream out, CreateMaterialRequest request) throws IOException {
+    JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
+    writer.setIndent("  ");
+    writeCreateMaterialRequestObject(writer, request);
+    writer.close();
+  }
+
+  public void writeCreateMaterialRequestObject(JsonWriter writer, CreateMaterialRequest materialRequest) throws
+      IOException {
+    writer.beginObject();
+    if(materialRequest.id != null) {
+      writer.name("id").value(materialRequest.getId());
     }
+  }
+
 }

@@ -29,7 +29,7 @@ public class TestStatic {
       public JsonElement handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
         StatusLine statusLine = httpResponse.getStatusLine();
         HttpEntity entity = httpResponse.getEntity();
-        if (statusLine.getStatusCode() >= 300 && statusLine.getStatusCode() != 500) {
+        if (statusLine.getStatusCode() >= 300 && statusLine.getStatusCode() != 500 && statusLine.getStatusCode() != 403) {
           throw new HttpResponseException(
               statusLine.getStatusCode(),
               statusLine.getReasonPhrase());

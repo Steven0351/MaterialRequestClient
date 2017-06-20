@@ -26,9 +26,10 @@ public class TestHTTPMethodsPut {
 
     CloseableHttpClient httpClient = HttpClients.createDefault();
     HttpPut httpPut = new HttpPut(requestToEdit);
-    httpPut.addHeader("content-type", "application/json");
+    httpPut.addHeader("Content-Type", "application/json");
     httpPut.addHeader("Authorization", user.getBearerToken());
-    CreateMaterialRequest createMaterialRequest = new CreateMaterialRequest("6U008R101", "8 Fiber Dielectric Flat Drop Cable", user.getUuid());
+    CreateMaterialRequest createMaterialRequest = new CreateMaterialRequest("6U008R101",
+        "8 Fiber Dielectric Flat Drop Cable", user.get_id());
 
 
     try {

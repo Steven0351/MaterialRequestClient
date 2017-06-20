@@ -31,7 +31,7 @@ public class UserLogin {
   private String password;
   private String bearerToken;
   private String role;
-  private String uuid;
+  private String _id;
   static String getUserUuidFromServer = "http://localhost:3005/api/v1/user/me";
   static String loginEndPoint = "http://localhost:3005/api/v1/user/login";
   private HttpPost login;
@@ -76,15 +76,15 @@ public class UserLogin {
     this.setToken("Bearer " + myJson.get("token").getAsString());
     this.uuidGet.addHeader("Authorization", this.getBearerToken());
     myJson = httpClient.execute(this.uuidGet, rh);
-    this.setUuid(myJson.get("id").getAsString());
+    this.set_id(myJson.get("id").getAsString());
   }
 
   public void setToken(String tokenFromServer) {
     this.bearerToken = tokenFromServer;
   }
 
-  public void setUuid(String uuidFromServer) {
-    this.uuid = uuidFromServer;
+  public void set_id(String uuidFromServer) {
+    this._id = uuidFromServer;
   }
 
   public String getUsername() {
@@ -95,8 +95,8 @@ public class UserLogin {
     return bearerToken;
   }
 
-  public String getUuid() {
-    return uuid;
+  public String get_id() {
+    return _id;
   }
 
   @Override
@@ -104,7 +104,7 @@ public class UserLogin {
     return "UserLogin{" +
         "username='" + username + '\'' +
         ", bearerToken='" + bearerToken + '\'' +
-        ", uuid='" + uuid + '\'' +
+        ", _id='" + _id + '\'' +
         '}';
   }
 }
