@@ -1,4 +1,4 @@
-package com.stevensherry;
+package com.stevensherry.clientclasses;
 
 /**
  * Created by steven.sherry on 6/1/2017.

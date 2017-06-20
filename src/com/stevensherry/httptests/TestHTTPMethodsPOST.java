@@ -34,7 +34,8 @@ public class TestHTTPMethodsPOST {
     HttpPost createMaterial = new HttpPost(createMaterialRequest);
     createMaterial.addHeader("content-type", "application/json");
     createMaterial.addHeader("Authorization", user.getBearerToken());
-    CreateMaterialRequest createMaterialRequest = new CreateMaterialRequest("1F.SM.LC.LC.3FT", "3FT Singlemode LC to LC jumper", user.get_id());
+    CreateMaterialRequest createMaterialRequest = new CreateMaterialRequest("1F.SM.LC.LC.3FT",
+        "3FT Singlemode LC to LC jumper", user.get_id(), "today");
     try {
       StringEntity postString = new StringEntity(gsonBuilder.toJson(createMaterialRequest));
       System.out.println(gsonBuilder.toJson(createMaterialRequest));
