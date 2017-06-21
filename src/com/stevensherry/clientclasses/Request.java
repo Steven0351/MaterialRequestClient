@@ -4,28 +4,29 @@ import com.stevensherry.httptests.TestStatic;
 import org.apache.http.entity.StringEntity;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 /**
  * Created by steven.sherry on 6/20/2017.
  */
-public abstract class Request {
+public abstract class Request implements Comparable {
 
-  private String dateRequested;
+  private LocalDateTime dateRequested;
   private String requestor;
   private String _id;
   private StringEntity stringEntity;
 
-  public Request(String dateRequested, String requestor) {
+  public Request(LocalDateTime dateRequested, String requestor) {
     this.dateRequested = dateRequested;
     this.requestor = requestor;
   }
 
-  public Request(String dateRequested, String requestor, String id) {
+  public Request(LocalDateTime dateRequested, String requestor, String id) {
     this(dateRequested, requestor);
     this._id = id;
   }
 
-  public String getDateRequested() {
+  public LocalDateTime getDateRequested() {
     return dateRequested;
   }
 
@@ -48,6 +49,19 @@ public abstract class Request {
       System.out.println(TestStatic.gsonBuilder.toJson(this));
     } catch (IOException e) {
       e.printStackTrace();
+    }
+  }
+
+  @Override
+  public int compareTo(Object o) {
+    if (this == o) {
+      return 0;
+    } else if (((Request)o).getDateRequested().compareTo(this.getDateRequested()) > 0) {
+      return -1;
+    } else if (((Request)o).getDateRequested().compareTo(this.getDateRequested()) == 0) {
+      return 0;
+    } else {
+      return 1;
     }
   }
 

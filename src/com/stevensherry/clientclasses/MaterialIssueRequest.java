@@ -1,5 +1,7 @@
 package com.stevensherry.clientclasses;
 
+import java.time.*;
+
 /**
  * Created by steven.sherry on 6/20/2017.
  */
@@ -7,22 +9,22 @@ public class MaterialIssueRequest extends CycleCountRequest{
 
   private String workOrder;
 
-  public MaterialIssueRequest(String dateRequested, String requestor, String workOrder) {
+  public MaterialIssueRequest(LocalDateTime dateRequested, String requestor, String workOrder) {
     super(dateRequested, requestor);
     this.workOrder = workOrder;
   }
 
-  public MaterialIssueRequest(String dateRequested, String requestor, String id, String workOrder) {
+  public MaterialIssueRequest(LocalDateTime dateRequested, String requestor, String id, String workOrder) {
     super(dateRequested, requestor, id);
     this.workOrder = workOrder;
   }
 
-  public MaterialIssueRequest(String dateRequested, String requestor, String workOrder, String... inventoryItems) {
+  public MaterialIssueRequest(LocalDateTime dateRequested, String requestor, String workOrder, String... inventoryItems) {
     super(dateRequested, requestor, inventoryItems);
     this.workOrder = workOrder;
   }
 
-  public MaterialIssueRequest(String dateRequested, String requestor, String id, String workOrder, String... inventoryItems) {
+  public MaterialIssueRequest(LocalDateTime dateRequested, String requestor, String id, String workOrder, String... inventoryItems) {
     super(dateRequested, requestor, id, inventoryItems);
     this.workOrder = workOrder;
   }

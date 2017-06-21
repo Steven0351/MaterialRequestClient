@@ -2,6 +2,7 @@ package com.stevensherry.clientclasses;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.time.*;
 
 /**
  * Created by steven.sherry on 6/20/2017.
@@ -10,7 +11,7 @@ public class WOCompletionRequest extends Request {
 
   private ArrayList<String> workOrders;
 
-  public WOCompletionRequest(String dateRequested, String requestor, String... workOrders) {
+  public WOCompletionRequest(LocalDateTime dateRequested, String requestor, String... workOrders) {
     super(dateRequested, requestor);
     this.workOrders = new ArrayList<>(Arrays.asList(workOrders));
   }

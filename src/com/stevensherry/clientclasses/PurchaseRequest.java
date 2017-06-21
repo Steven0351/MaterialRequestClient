@@ -1,5 +1,7 @@
 package com.stevensherry.clientclasses;
 
+import java.time.*;
+
 /**
  * Created by steven.sherry on 6/20/2017.
  */
@@ -13,7 +15,7 @@ public class PurchaseRequest extends CycleCountRequest {
   private String purchaseOrderNumber;
   private String trackingInformation;
 
-  public PurchaseRequest(String dateRequested, String requestor, String shippingMethod, boolean hot, boolean dropShip,
+  public PurchaseRequest(LocalDateTime dateRequested, String requestor, String shippingMethod, boolean hot, boolean dropShip,
                          boolean approved, boolean placed, boolean acknowledgementReceived, String purchaseOrderNumber,
                          String trackingInformation) {
     super(dateRequested, requestor);
@@ -27,7 +29,7 @@ public class PurchaseRequest extends CycleCountRequest {
     this.trackingInformation = trackingInformation;
   }
 
-  public PurchaseRequest(String dateRequested, String requestor, String id, String shippingMethod, boolean hot,
+  public PurchaseRequest(LocalDateTime dateRequested, String requestor, String id, String shippingMethod, boolean hot,
                          boolean dropShip, boolean approved, boolean placed, boolean acknowledgementReceived,
                          String purchaseOrderNumber, String trackingInformation) {
     super(dateRequested, requestor, id);
@@ -41,7 +43,7 @@ public class PurchaseRequest extends CycleCountRequest {
     this.trackingInformation = trackingInformation;
   }
 
-  public PurchaseRequest(String dateRequested, String requestor, String shippingMethod, boolean hot, boolean dropShip,
+  public PurchaseRequest(LocalDateTime dateRequested, String requestor, String shippingMethod, boolean hot, boolean dropShip,
                          boolean approved, boolean placed, boolean acknowledgementReceived, String purchaseOrderNumber,
                          String trackingInformation, String... inventoryItems) {
     super(dateRequested, requestor, inventoryItems);
@@ -55,7 +57,7 @@ public class PurchaseRequest extends CycleCountRequest {
     this.trackingInformation = trackingInformation;
   }
 
-  public PurchaseRequest(String dateRequested, String requestor, String id, String shippingMethod, boolean hot,
+  public PurchaseRequest(LocalDateTime dateRequested, String requestor, String id, String shippingMethod, boolean hot,
                          boolean dropShip, boolean approved, boolean placed, boolean acknowledgementReceived,
                          String purchaseOrderNumber, String trackingInformation, String... inventoryItems) {
     super(dateRequested, requestor, id, inventoryItems);
@@ -132,4 +134,21 @@ public class PurchaseRequest extends CycleCountRequest {
   public void setTrackingInformation(String trackingInformation) {
     this.trackingInformation = trackingInformation;
   }
+
+  public enum PurchaseFilter {
+    HOT ("/hot"),
+    PLACED ("/placed"),
+    REQUESTOR ("/requestor");
+
+    private final String filter;
+    PurchaseFilter(String filter) {
+      this.filter = filter;
+    }
+
+    public String getFilter() {
+      return this.filter;
+    }
+
+  }
+
 }

@@ -34,7 +34,7 @@ public enum BaseRoute {
     return BASE_URL.getRoute() + BASE_ENDPOINT.getRoute() + endPoint.getRoute();
   }
 
-  // Next two methods are primarily for GET, PUT, and DELETE methods
+  // Next two methods are primarily for GET, PUT, and DELETE methods with paramters
   public static String buildRoute(BaseRoute baseRoute, String param) {
     return buildRoute(baseRoute) + "/" + param;
   }
@@ -43,7 +43,7 @@ public enum BaseRoute {
     return buildRoute(baseRoute, firstParam) + "/" + secondParam;
   }
 
-  //Next three methods are for POST methods
+  //Next two methods are primarily for POST methods
   public static String buildPostRoute(BaseRoute endPoint) {
     return buildRoute(endPoint) + ADD.getRoute();
   }

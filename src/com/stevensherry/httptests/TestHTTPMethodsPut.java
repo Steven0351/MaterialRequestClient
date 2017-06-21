@@ -8,6 +8,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 /**
  * Created by stevensherry on 6/13/17.
@@ -29,7 +30,7 @@ public class TestHTTPMethodsPut {
     httpPut.addHeader("Content-Type", "application/json");
     httpPut.addHeader("Authorization", user.getBearerToken());
     CreateMaterialRequest createMaterialRequest = new CreateMaterialRequest("6U008R101",
-        "8 Fiber Dielectric Flat Drop Cable", user.get_id(), "today");
+        "8 Fiber Dielectric Flat Drop Cable", user.get_id(), LocalDateTime.now());
 
 
     try {
