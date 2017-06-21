@@ -16,12 +16,12 @@ public abstract class Request implements Comparable {
   private String _id;
   private StringEntity stringEntity;
 
-  public Request(LocalDateTime dateRequested, String requestor) {
+  protected Request(LocalDateTime dateRequested, String requestor) {
     this.dateRequested = dateRequested;
     this.requestor = requestor;
   }
 
-  public Request(LocalDateTime dateRequested, String requestor, String id) {
+  protected Request(LocalDateTime dateRequested, String requestor, String id) {
     this(dateRequested, requestor);
     this._id = id;
   }
@@ -53,14 +53,21 @@ public abstract class Request implements Comparable {
   }
 
   @Override
+  //
   public int compareTo(Object o) {
     if (this == o) {
       return 0;
-    } else if (((Request)o).getDateRequested().compareTo(this.getDateRequested()) > 0) {
-      return -1;
-    } else if (((Request)o).getDateRequested().compareTo(this.getDateRequested()) == 0) {
-      return 0;
     } else {
+      if (o instanceof Request) {
+        if (((Request)o).getDateRequested().compareTo(this.getDateRequested()) > 0) {
+          return -1;
+        } else if (((Request)o).getDateRequested().compareTo(this.getDateRequested()) == 0) {
+          return 0;
+        } else {
+          return 1;
+        }
+      }
+      System.out.println("Not a Request object!");
       return 1;
     }
   }
