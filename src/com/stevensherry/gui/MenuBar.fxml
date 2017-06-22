@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<MenuBar xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="com.stevensherry.gui.MenuBarController">
+  <menus>
+    <Menu
+        mnemonicParsing="false"
+        text="File">
+      <items>
+        <MenuItem
+            fx:id="newRequest"
+            mnemonicParsing="false"
+            onAction="#createNewRequest"
+            text="Create New Request"/>
+        <MenuItem
+            fx:id="logout"
+            mnemonicParsing="false"
+            onAction="#logout"
+            text="Logout"/>
+      </items>
+    </Menu>
+  </menus>
+</MenuBar>
