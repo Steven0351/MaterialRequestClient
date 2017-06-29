@@ -53,7 +53,6 @@ public abstract class Request implements Comparable {
   }
 
   @Override
-  //
   public int compareTo(Object o) {
     if (this == o) {
       return 0;
@@ -72,4 +71,8 @@ public abstract class Request implements Comparable {
     }
   }
 
+  @Override
+  public String toString() {
+    return requestor + " " + dateRequested.toLocalDate().toString();
+  }
 }

@@ -32,8 +32,8 @@ public class Main extends Application {
     URL menuBarUrl = getClass().getResource("MenuBar.fxml");
     MenuBar menuBar = FXMLLoader.load(menuBarUrl);
 
-    URL dashboardUrl = getClass().getResource("Dashboard.fxml");
-    GridPane dashboard = FXMLLoader.load(dashboardUrl);
+    URL dashboardUrl = getClass().getResource("newdashboard.fxml");
+    BorderPane dashboard = FXMLLoader.load(dashboardUrl);
     root.setTop(menuBar);
     root.setCenter(dashboard);
 
